@@ -5,7 +5,7 @@ long long algorithm2(int n);
 long long algorithm3(int n);
 long long algorithm4(int n);
 int main() {
-    int t1,t2,t3,t4;
+    long long t1,t2,t3,t4;
     printf("n\t algorithm1 \t algorithm2 \t algorithm3 \t algorithm4");
     printf("\n");
     int n=2048;
