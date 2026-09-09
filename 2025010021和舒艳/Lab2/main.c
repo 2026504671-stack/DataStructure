@@ -1,53 +1,60 @@
 #include <stdio.h>
 
-long long algorithm1(int n) {
+//算法1：普通循环 O(n)
+long long algorithm1(int n){
     long long count = 0;
-    for (int i = 0; i < n; i++) {
+    int i;
+    for(i = 0; i < n; i++){
         count++;
     }
     return count;
 }
 
-long long algorithm2(int n) {
+//算法2：递归 O(n)
+long long algorithm2(int n){
     long long count = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j <= i; j++) {
-            count++;
-        }
+    if(n <= 1){
+        count++;
+        return count;
     }
-    return count;
+    count++;
+    return count + algorithm2(n - 1);
 }
 
-long long algorithm3(int n) {
+//算法3：倍增循环 O(logn)
+long long algorithm3(int n){
     long long count = 0;
-    for (int i = 1; i < n; i *= 2) {
+    int i = 1;
+    while(i < n){
+        i *= 2;
         count++;
     }
     return count;
 }
 
-long long algorithm4(int n) {
+//算法4：分治递归 O(logn)
+long long algorithm4(int n){
     long long count = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = 1; j < n; j *= 2) {
-            count++;
-        }
+    if(n <= 1){
+        count++;
+        return count;
     }
-    return count;
+    count++;
+    return count + algorithm4(n / 2);
 }
 
-int main(void) {
-    int ns[] = {2048, 4096, 8192, 16384};
-    int len = sizeof(ns) / sizeof(ns[0]);
-
-    printf("n\talgorithm1\talgorithm2\talgorithm3\talgorithm4\n");
-    for (int i = 0; i < len; i++) {
+int main()
+{
+    int ns[] = {2048,4096,8192,16384};
+    int len = sizeof(ns)/sizeof(ns[0]);
+    int i;
+    for(i = 0; i < len; i++){
         int n = ns[i];
         long long a1 = algorithm1(n);
         long long a2 = algorithm2(n);
         long long a3 = algorithm3(n);
         long long a4 = algorithm4(n);
-        printf("%d\t%lld\t\t%lld\t\t%lld\t\t%lld\n", n, a1, a2, a3, a4);
+        printf("n=%d\t%lld\t%lld\t%lld\t%lld\n",n,a1,a2,a3,a4);
     }
     return 0;
 }
