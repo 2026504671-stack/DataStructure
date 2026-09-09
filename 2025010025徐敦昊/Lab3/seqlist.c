@@ -37,7 +37,7 @@ int removeAt(SeqList *list, int index, int *removed) {
     if (removed == NULL) {
         return 0;
     }
-    if (index < 0 || index >= list->size) {
+    if (index < 0 || index > list->size - 1) {
         return 0;
     }
     
