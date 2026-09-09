@@ -1,5 +1,4 @@
 #include<stdio.h>
-int count=0;
 long long algorithm1(int n);
 long long algorithm2(int n);
 long long algorithm3(int n);
