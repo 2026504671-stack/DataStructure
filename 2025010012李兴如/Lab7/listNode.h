@@ -44,7 +44,7 @@ ListNode<T>* ListNode<T>::insertAsPred(const T& e) {
  * 把 pred 换成 succ、this 换成 succ 的关系想一遍即可。 */
 template <typename T>
 ListNode<T>* ListNode<T>::insertAsSucc(const T& e) {
-    ListNode<T>* x=new ListNode<T>(e,succ,this);
+    ListNode<T>* x=new ListNode<T>(e,this,succ);
     succ=x;
     succ->pred=x;
     return x;   /* TODO */

@@ -103,7 +103,7 @@ int List<T>::clear() {
         _size--;
     }
     return t;
-    return 0;   /* TODO */
+   /* TODO */
 }
 
 /* --------------------------------------------------------------------------
@@ -141,27 +141,15 @@ ListNode<T>* List<T>::insertAsLast(const T& e) {
 /* 练习 4a：作为 p 的后继插入。_size 由 List 维护，ListNode 只顾接链 */
 template <typename T>
 ListNode<T>* List<T>::insertA(ListNode<T>* p, const T& e) {
-    ListNode<T>* q=new ListNode<T>();
-    q->data=e;
-    q->pred=p;
-    q->succ=p->succ;
-    p->succ->pred=q;
-    p->succ=q;
     _size++;
-    return q;   /* TODO */
+    return p->insertAsSucc(e);   /* TODO */
 }
 
 /* 练习 4b：作为 p 的前驱插入。注意 p 允许是 trailer，也允许是首结点 */
 template <typename T>
 ListNode<T>* List<T>::insertB(ListNode<T>* p, const T& e) {
-    ListNode<T>* q=new ListNode<T>();
-    q->data=e;
-    q->succ=p;
-    q->pred=p->pred;
-    p->pred->succ=q;
-    p->pred=q;
     _size++;
-    return q;   /* TODO */
+    return p->insertAsPred(e);   /* TODO */
 }
 
 /* --------------------------------------------------------------------------
@@ -235,13 +223,9 @@ template <typename T>
 bool List<T>::insert(Rank r, const T& e) {
     if (r<0 || r>_size)
         return false;
-    if (r==_size) {
-        insertAsLast(e);
-        return true;
-    }
     ListNode<T>* p = (*this)[r];
-            insertB(p,e);
-            return true;
+    insertB(p,e);
+    return true;
     /* TODO */
 }
 
@@ -251,15 +235,9 @@ template <typename T>
 bool List<T>::remove(Rank r, T& e) {
     if (r<0 || r>_size)
         return false;
-    ListNode<T>* p = header;
-    for (int i=0;i<_size;i++) {
-        p=p->succ;
-        if (i==r) {
-            e=remove(p);
-            return true;
-        }
-    }
-    return false;/* TODO */
+    ListNode<T>* p = (*this)[r];
+    e=remove(p);
+    return true;/* TODO */
 }
 
 /* 练习 8c：对应 C 版 listGet，按秩读取，失败时不修改 e */
@@ -268,14 +246,8 @@ bool List<T>::get(Rank r, T& e) const {
     if (r<0 || r>=_size)
         return false;
     ListNode<T>* p = header;
-    for (int i=0;i<_size;i++) {
-        p=p->succ;
-        if (i==r) {
-            e=p->data;
-            return true;
-        }
-    }
-    return false;
+    e=p->data;
+    return true;
     /* TODO */
 }
 
