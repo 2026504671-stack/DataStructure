@@ -205,12 +205,11 @@ template <typename T>
 ListNode<T>* List<T>::operator[](Rank r) const {
     if (r<0 || r>_size)
         return nullptr;
-    ListNode<T>* p = header;
-    for (int i=1;i<=_size;i++) {
+    ListNode<T>* p = first();
+    for (int i=0;i<r;i++) {
         p=p->succ;
-        if (i == r)
-            return p;
-    }/* TODO */
+    }
+        return p;/* TODO */
 }
 
 /* 教师提供：位置折算成秩。查不到（含 nullptr）给 -1 */
@@ -240,15 +239,10 @@ bool List<T>::insert(Rank r, const T& e) {
         insertAsLast(e);
         return true;
     }
-    ListNode<T>* p = header;
-    for (int i=0;i<_size;i++) {
-        p=p->succ;
-        if (i==r) {
+    ListNode<T>* p = (*this)[r];
             insertB(p,e);
             return true;
-        }
-    }
-     return false;  /* TODO */
+    /* TODO */
 }
 
 /* 练习 8b：对应 C 版 listRemove，删除秩 r 处的结点，数据经引用参数 e 带回。
@@ -305,7 +299,7 @@ template <typename T>
 void List<T>::printReverse() const {
     std::cout << "[size = " << _size << "] reverse: ";
     ListNode<T>* p = trailer;
-    for (int i=0;i<_size;i++) {
+    while (p!=header) {
         p=p->pred;
         std::cout<<p->data<<" ";
     }/* TODO */

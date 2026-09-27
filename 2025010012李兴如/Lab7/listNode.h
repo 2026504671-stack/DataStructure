@@ -37,7 +37,7 @@ ListNode<T>* ListNode<T>::insertAsPred(const T& e) {
     ListNode<T>* x=new ListNode<T>(e,pred,this);
     pred->succ=x;
     pred=x;
-    return nullptr;   /* TODO */
+    return x;   /* TODO */
 }
 
 /* 练习 2：在自己后面插入 e，返回新结点 x。与练习 1 左右对称，
@@ -47,7 +47,7 @@ ListNode<T>* ListNode<T>::insertAsSucc(const T& e) {
     ListNode<T>* x=new ListNode<T>(e,succ,this);
     succ=x;
     succ->pred=x;
-    return nullptr;   /* TODO */
+    return x;   /* TODO */
 }
 
 #endif
