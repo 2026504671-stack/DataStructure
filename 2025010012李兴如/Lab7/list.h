@@ -245,7 +245,7 @@ template <typename T>
 bool List<T>::get(Rank r, T& e) const {
     if (r<0 || r>=_size)
         return false;
-    ListNode<T>* p = header;
+    ListNode<T>* p = (*this)[r];
     e=p->data;
     return true;
     /* TODO */
