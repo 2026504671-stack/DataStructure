@@ -467,11 +467,12 @@ Resume 到第三个断点，程序停在 `listRemove` 的 `free(p);` 上，这�
 
 | 记录项目 | 图 A：前驱还没改 | 图 B：前驱改完 | 图 C：已断链、尚未释放 |
 | :--- | :--- | :--- | :--- |
-| `p` 的地址 | 0xb018a0（图 A 中 Variables 里 `p` 的地址） | 0xb018a0（与图 A 相同，见截图 B 的 `p`） | 0xb017a0（图 C 中 `p` 的地址，即图 A 里 `prev` 的地址，两者都是 -1 结点） |
+| `p` 的地址 | 0xb018a0 | 0xb018a0 | 0xb017a0 |
 | `p->data` | 25 | 25 | -1 |
-| `p->next` 的地址 | 0xb017e0（图 A 中 `p->next`，即 42 结点的地址） | 0xb017e0（与图 A 相同，仍是 42 结点） | 0xb018a0（图 C 中 `p->next`，即 25 结点的地址） |
-| `prev->next` 的地址（图 C 填 `list->head->next`） | 0xb017e0（与 `p->next` 相同，仍是 42 结点） | 0xb018a0（已改为 `p` 的地址） | 0x________（图 C 中 `list->head->next`，即 18 结点的地址，不再是 `p`；请从图 C Variables 面板展开 `list`→`head`→`next`，或 Memory View 里 `list->head->next` 处读取，填写实际十六进制值） |
+| `p->next` 的地址 | 0xb017e0 | 0xb017e0 | 0xb018a0 |
+| `prev->next` / `list->head->next` | 0xb017e0 | 0xb018a0 | 0xb017e0 |
 | `list->size` | 5 | 5 | 6 |
+
 
 回答下面两个问题：
 
